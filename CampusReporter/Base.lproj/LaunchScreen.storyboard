@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +18,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facilities_blue" translatesAutoresizingMaskIntoConstraints="NO" id="zDB-Zn-1bh">
+                                <rect key="frame" x="40" y="240" width="520" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="zDB-Zn-1bh" secondAttribute="height" multiplier="555:128" id="Xjb-7a-PV8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zDB-Zn-1bh" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="20" id="6yy-L3-U3B"/>
+                            <constraint firstItem="zDB-Zn-1bh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Idg-3z-2bi"/>
+                            <constraint firstItem="zDB-Zn-1bh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="NAG-FG-XY8"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +39,7 @@
             <point key="canvasLocation" x="206" y="335"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="facilities_blue" width="1217" height="197"/>
+    </resources>
 </document>

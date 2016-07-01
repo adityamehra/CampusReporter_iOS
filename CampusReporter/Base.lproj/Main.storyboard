@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -82,6 +83,7 @@
                                 <rect key="frame" x="20" y="102" width="368" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="C5W-Y8-KFo"/>
+                                    <constraint firstAttribute="width" secondItem="9eW-gL-aaT" secondAttribute="height" multiplier="23:8" id="ht4-N4-BE7"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -126,24 +128,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456" y="-1000"/>
-        </scene>
-        <!--Email View Controller-->
-        <scene sceneID="X50-H2-sLi">
-            <objects>
-                <viewController id="7fp-cm-iOQ" customClass="EmailViewController" customModule="CampusReporter" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XMj-kH-7dA"/>
-                        <viewControllerLayoutGuide type="bottom" id="mYa-O1-MrP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EaB-pq-zw0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8fv-lW-EBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="991" y="-1068"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IYB-qH-JXB">

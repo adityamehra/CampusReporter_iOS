@@ -8,11 +8,13 @@
 
 import UIKit
 import MessageUI
+import CoreLocation
 
 class MainViewController: UIViewController,
                             MFMailComposeViewControllerDelegate,
                             UIImagePickerControllerDelegate,
-                            UINavigationControllerDelegate{
+                            UINavigationControllerDelegate,
+                            CLLocationManagerDelegate{
     
     
     @IBOutlet weak var record: UIButton!
@@ -25,8 +27,13 @@ class MainViewController: UIViewController,
     
     @IBOutlet weak var stop: UIButton!
     
-    
     @IBOutlet weak var textView: UITextView!
+    
+    var locationManager: CLLocationManager!
+    
+    var latitude : String!
+    
+    var longitude : String!
     
     override func viewWillAppear(animated: Bool) {
         play.enabled = false
@@ -39,6 +46,17 @@ class MainViewController: UIViewController,
         
         textView.text = "Placeholders"
         textView.textColor = UIColor.lightGrayColor()
+        
+        self.locationManager = CLLocationManager()
+        
+        locationManager.delegate = self
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.startUpdatingLocation()
+        
+        locationManager.requestAlwaysAuthorization()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -132,7 +150,7 @@ class MainViewController: UIViewController,
             // Configure the fields of the interface.
             composeVC.setToRecipients(["adityamehra@aggiemail.usu.edu"])
             composeVC.setSubject("Regarding CampusReporter")
-            composeVC.setMessageBody("Your Message here.", isHTML: false)
+            composeVC.setMessageBody("https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
             
             // Present the view controller modally.
             self.presentViewController(composeVC, animated: true, completion: nil)
@@ -141,6 +159,19 @@ class MainViewController: UIViewController,
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        let currentLocation : CLLocation = newLocation
+        
+        
+        latitude = "\(currentLocation.coordinate.latitude)"
+        longitude = "\(currentLocation.coordinate.longitude)"
+        print("longitude \(self.latitude)")
+        print("latitude \(self.longitude)")
+        
+        
     }
 }
 

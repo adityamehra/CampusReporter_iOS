@@ -14,7 +14,6 @@
 		487DA2E21D110EE300BBA369 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 487DA2E01D110EE300BBA369 /* LaunchScreen.storyboard */; };
 		487DA2ED1D110EE300BBA369 /* CampusReporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487DA2EC1D110EE300BBA369 /* CampusReporterTests.swift */; };
 		487DA2F81D110EE300BBA369 /* CampusReporterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487DA2F71D110EE300BBA369 /* CampusReporterUITests.swift */; };
-		48BFE26A1D209FB3006CE27E /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BFE2691D209FB3006CE27E /* EmailViewController.swift */; };
 		48BFE26C1D20A85B006CE27E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48BFE26B1D20A85B006CE27E /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +48,6 @@
 		487DA2F31D110EE300BBA369 /* CampusReporterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusReporterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		487DA2F71D110EE300BBA369 /* CampusReporterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusReporterUITests.swift; sourceTree = "<group>"; };
 		487DA2F91D110EE300BBA369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48BFE2691D209FB3006CE27E /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailViewController.swift; path = ../EmailViewController.swift; sourceTree = "<group>"; };
 		48BFE26B1D20A85B006CE27E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -103,7 +101,6 @@
 		487DA2D61D110EE300BBA369 /* CampusReporter */ = {
 			isa = PBXGroup;
 			children = (
-				48BFE2691D209FB3006CE27E /* EmailViewController.swift */,
 				487DA2D91D110EE300BBA369 /* MainViewController.swift */,
 				487DA2DB1D110EE300BBA369 /* Main.storyboard */,
 				487DA2DE1D110EE300BBA369 /* Assets.xcassets */,
@@ -265,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				480C56EB1D19005F00A7243C /* AppDelegate.swift in Sources */,
-				48BFE26A1D209FB3006CE27E /* EmailViewController.swift in Sources */,
 				487DA2DA1D110EE300BBA369 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
