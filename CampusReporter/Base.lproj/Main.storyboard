@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jQc-ng-S4w">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--CampusReporter-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="CampusReporter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-9m-TgC">
+                                <rect key="frame" x="20" y="468" width="90" height="48"/>
+                                <color key="backgroundColor" white="0.79956190058048937" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="mic">
+                                    <color key="titleColor" red="0.95105372843017422" green="0.98046430932858564" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWU-FW-NPd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWx-KE-ifq">
+                                <rect key="frame" x="243" y="468" width="71" height="48"/>
+                                <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="play">
+                                    <color key="titleColor" red="0.95105372840000002" green="0.98046430929999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gv4-LY-kpT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qX-Cv-scK">
+                                <rect key="frame" x="20" y="531" width="90" height="48"/>
+                                <color key="backgroundColor" white="0.79777918245968404" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="camera">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bfe-02-qsm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4A-Dg-DqQ">
+                                <rect key="frame" x="243" y="531" width="145" height="48"/>
+                                <color key="backgroundColor" white="0.80160678313082501" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="send">
+                                    <color key="titleColor" red="0.95105372840000002" green="0.98046430929999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NdW-4x-LKb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-Km-yw6">
+                                <rect key="frame" x="322" y="468" width="66" height="48"/>
+                                <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="stop">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mTf-XO-Gq2"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="368" placeholderIntrinsicHeight="128" preservesSuperviewLayoutMargins="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Bth-0H-aaK">
+                                <rect key="frame" x="20" y="246" width="368" height="202"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="202" id="qm7-3g-LhL"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facilities_blue" translatesAutoresizingMaskIntoConstraints="NO" id="9eW-gL-aaT">
+                                <rect key="frame" x="20" y="102" width="368" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="C5W-Y8-KFo"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Bth-0H-aaK" firstAttribute="leading" secondItem="0qX-Cv-scK" secondAttribute="leading" id="2lq-IH-Xq3"/>
+                            <constraint firstItem="0qX-Cv-scK" firstAttribute="width" secondItem="IaL-9m-TgC" secondAttribute="width" id="7Hg-PI-uwv"/>
+                            <constraint firstItem="r4A-Dg-DqQ" firstAttribute="height" secondItem="IaL-9m-TgC" secondAttribute="height" id="8BC-gJ-WMi"/>
+                            <constraint firstItem="aWx-KE-ifq" firstAttribute="leading" secondItem="IaL-9m-TgC" secondAttribute="trailing" constant="133" id="C2w-GN-K5E"/>
+                            <constraint firstItem="Bth-0H-aaK" firstAttribute="leading" secondItem="IaL-9m-TgC" secondAttribute="leading" id="Ddp-S9-HbN"/>
+                            <constraint firstItem="r4A-Dg-DqQ" firstAttribute="leading" secondItem="0qX-Cv-scK" secondAttribute="trailing" constant="133" id="G1J-n1-TyA"/>
+                            <constraint firstItem="P3W-Km-yw6" firstAttribute="height" secondItem="IaL-9m-TgC" secondAttribute="height" id="Kja-nr-2f9"/>
+                            <constraint firstItem="9eW-gL-aaT" firstAttribute="trailing" secondItem="P3W-Km-yw6" secondAttribute="trailing" id="Max-xY-taA"/>
+                            <constraint firstItem="9eW-gL-aaT" firstAttribute="trailing" secondItem="r4A-Dg-DqQ" secondAttribute="trailing" id="P0K-ld-V61"/>
+                            <constraint firstItem="Bth-0H-aaK" firstAttribute="top" secondItem="9eW-gL-aaT" secondAttribute="bottom" constant="16" id="RR0-4s-gnB"/>
+                            <constraint firstItem="9eW-gL-aaT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="V3s-cU-lQg"/>
+                            <constraint firstItem="9eW-gL-aaT" firstAttribute="leading" secondItem="0qX-Cv-scK" secondAttribute="leading" id="VJz-G7-IiA"/>
+                            <constraint firstItem="Bth-0H-aaK" firstAttribute="trailing" secondItem="P3W-Km-yw6" secondAttribute="trailing" id="WSx-dp-MHs"/>
+                            <constraint firstItem="0qX-Cv-scK" firstAttribute="height" secondItem="IaL-9m-TgC" secondAttribute="height" id="WbW-uT-mbr"/>
+                            <constraint firstItem="aWx-KE-ifq" firstAttribute="leading" secondItem="IaL-9m-TgC" secondAttribute="trailing" constant="133" id="a2V-j5-ATB"/>
+                            <constraint firstAttribute="trailing" secondItem="P3W-Km-yw6" secondAttribute="trailing" constant="26" id="aCc-28-WEr"/>
+                            <constraint firstItem="IaL-9m-TgC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dxv-5r-d5Z"/>
+                            <constraint firstItem="P3W-Km-yw6" firstAttribute="top" secondItem="Bth-0H-aaK" secondAttribute="bottom" constant="20" id="lPe-Ga-Cto"/>
+                            <constraint firstAttribute="trailing" secondItem="r4A-Dg-DqQ" secondAttribute="trailing" constant="26" id="nMN-zt-z0o"/>
+                            <constraint firstItem="0qX-Cv-scK" firstAttribute="top" secondItem="IaL-9m-TgC" secondAttribute="bottom" constant="15" id="ph5-8k-AIW"/>
+                            <constraint firstItem="P3W-Km-yw6" firstAttribute="leading" secondItem="aWx-KE-ifq" secondAttribute="trailing" constant="8" id="rKY-P8-wKU"/>
+                            <constraint firstItem="aWx-KE-ifq" firstAttribute="height" secondItem="IaL-9m-TgC" secondAttribute="height" id="ufQ-LI-5qy"/>
+                            <constraint firstItem="Bth-0H-aaK" firstAttribute="trailing" secondItem="r4A-Dg-DqQ" secondAttribute="trailing" id="x4L-G1-HMl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CampusReporter" id="Jna-pR-YTg"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="camera" destination="0qX-Cv-scK" id="sM2-IH-xEE"/>
+                        <outlet property="play" destination="aWx-KE-ifq" id="KeO-cc-dd2"/>
+                        <outlet property="record" destination="IaL-9m-TgC" id="GTe-NO-iCX"/>
+                        <outlet property="send" destination="r4A-Dg-DqQ" id="Q0R-So-8mr"/>
+                        <outlet property="stop" destination="P3W-Km-yw6" id="r5V-Yd-j1X"/>
+                        <outlet property="textView" destination="Bth-0H-aaK" id="W3k-tZ-OH6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="-1000"/>
+        </scene>
+        <!--Email View Controller-->
+        <scene sceneID="X50-H2-sLi">
+            <objects>
+                <viewController id="7fp-cm-iOQ" customClass="EmailViewController" customModule="CampusReporter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XMj-kH-7dA"/>
+                        <viewControllerLayoutGuide type="bottom" id="mYa-O1-MrP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EaB-pq-zw0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8fv-lW-EBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="991" y="-1068"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IYB-qH-JXB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jQc-ng-S4w" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NEM-XP-PK4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xpD-Bf-xPe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I5R-VZ-EYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-356" y="-1000"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera" width="48" height="48"/>
+        <image name="facilities_blue" width="1217" height="197"/>
+        <image name="mic" width="48" height="48"/>
+        <image name="play" width="48" height="48"/>
+        <image name="send" width="48" height="48"/>
+        <image name="stop" width="48" height="48"/>
+    </resources>
+</document>
