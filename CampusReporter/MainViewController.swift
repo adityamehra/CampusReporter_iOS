@@ -29,6 +29,8 @@ class MainViewController: UIViewController,
     
     @IBOutlet weak var textView: UITextView!
     
+    var imageToattach : UIImage!
+    
     var locationManager: CLLocationManager!
     
     var latitude : String!
@@ -106,6 +108,7 @@ class MainViewController: UIViewController,
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         UIImageWriteToSavedPhotosAlbum (image, self, #selector(MainViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        imageToattach = image
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
@@ -151,6 +154,12 @@ class MainViewController: UIViewController,
             composeVC.setToRecipients(["adityamehra@aggiemail.usu.edu"])
             composeVC.setSubject("Regarding CampusReporter")
             composeVC.setMessageBody("https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
+            
+            if let image = imageToattach {
+                let data : NSData
+                data = UIImageJPEGRepresentation(image, 1.0)!
+                composeVC.addAttachmentData(data, mimeType: "image/jpg", fileName: "image")
+            }
             
             // Present the view controller modally.
             self.presentViewController(composeVC, animated: true, completion: nil)
