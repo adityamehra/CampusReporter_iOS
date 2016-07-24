@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facilities_blue" translatesAutoresizingMaskIntoConstraints="NO" id="zDB-Zn-1bh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launcher_image" translatesAutoresizingMaskIntoConstraints="NO" id="zDB-Zn-1bh">
                                 <rect key="frame" x="40" y="240" width="520" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zDB-Zn-1bh" secondAttribute="height" multiplier="555:128" id="Xjb-7a-PV8"/>
@@ -36,10 +36,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="206" y="335"/>
+            <point key="canvasLocation" x="260" y="378"/>
         </scene>
     </scenes>
     <resources>
-        <image name="facilities_blue" width="1217" height="197"/>
+        <image name="launcher_image" width="1217" height="197"/>
     </resources>
 </document>

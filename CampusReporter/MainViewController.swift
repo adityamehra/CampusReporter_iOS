@@ -11,6 +11,7 @@ import MessageUI
 import CoreLocation
 
 class MainViewController: UIViewController,
+                            UITextViewDelegate,
                             MFMailComposeViewControllerDelegate,
                             UIImagePickerControllerDelegate,
                             UINavigationControllerDelegate,
@@ -49,6 +50,7 @@ class MainViewController: UIViewController,
         textView.text = "Placeholders"
         textView.textColor = UIColor.lightGrayColor()
         
+        //setting delegate on locationManager
         self.locationManager = CLLocationManager()
         
         locationManager.delegate = self
@@ -58,6 +60,10 @@ class MainViewController: UIViewController,
         locationManager.startUpdatingLocation()
         
         locationManager.requestAlwaysAuthorization()
+        
+        //setting delegate on textView
+        
+        textView.delegate = self
         
     }
     
@@ -91,7 +97,7 @@ class MainViewController: UIViewController,
     
     @IBAction func takePhoto(sender: AnyObject) {
         
-        print("Taking Photo!");
+        //print("Taking Photo!");
         
         let picker = UIImagePickerController()
         
@@ -155,6 +161,7 @@ class MainViewController: UIViewController,
             composeVC.setSubject("Regarding CampusReporter")
             composeVC.setMessageBody("https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
             
+            // Attaching the captured image to the email.
             if let image = imageToattach {
                 let data : NSData
                 data = UIImageJPEGRepresentation(image, 1.0)!
@@ -170,6 +177,10 @@ class MainViewController: UIViewController,
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /**
+     **This function is used to get the current location of the user.
+     **/
+    
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         
         let currentLocation : CLLocation = newLocation
@@ -177,10 +188,18 @@ class MainViewController: UIViewController,
         
         latitude = "\(currentLocation.coordinate.latitude)"
         longitude = "\(currentLocation.coordinate.longitude)"
-        print("longitude \(self.latitude)")
-        print("latitude \(self.longitude)")
+        //print("longitude \(self.latitude)")
+        //print("latitude \(self.longitude)")
         
-        
+    }
+    
+    override func touchesBegan(touches:Set<UITouch>, withEvent event: UIEvent?) {
+
+        self.view.endEditing(true)
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        textView.text = ""
     }
 }
 
