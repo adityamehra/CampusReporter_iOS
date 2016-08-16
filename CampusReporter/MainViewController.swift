@@ -19,23 +19,16 @@ class MainViewController: UIViewController,
     
     
     @IBOutlet weak var record: UIButton!
-    
     @IBOutlet weak var play: UIButton!
-    
     @IBOutlet weak var camera: UIButton!
-    
     @IBOutlet weak var send: UIButton!
-    
     @IBOutlet weak var stop: UIButton!
-    
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var imageToattach : UIImage!
-    
     var locationManager: CLLocationManager!
-    
     var latitude : String!
-    
     var longitude : String!
     
     override func viewWillAppear(animated: Bool) {
@@ -47,24 +40,33 @@ class MainViewController: UIViewController,
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        textView.text = "Placeholders"
+        
+        textView.text = "1. Write/Record the problem, building, and room number.\n\n2.Take a photo (optional).\n\n3.Send it.\n\nThank you."
         textView.textColor = UIColor.lightGrayColor()
+        
         
         //setting delegate on locationManager
         self.locationManager = CLLocationManager()
-        
         locationManager.delegate = self
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         locationManager.startUpdatingLocation()
-        
         locationManager.requestAlwaysAuthorization()
         
-        //setting delegate on textView
         
+        //setting delegate on textView
         textView.delegate = self
         
+        
+        //Making an IBAction for UIScrollView
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(MainViewController.scrollViewTapped(_:)))
+        scrollView.userInteractionEnabled = true
+        scrollView.addGestureRecognizer(tapGestureRecognizer)
+        
+    }
+    
+    //Removing first responder from textViewArea when ScrollView is tapped
+    func scrollViewTapped(img: AnyObject){
+        textView.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,14 +99,9 @@ class MainViewController: UIViewController,
     
     @IBAction func takePhoto(sender: AnyObject) {
         
-        //print("Taking Photo!");
-        
         let picker = UIImagePickerController()
-        
         picker.delegate = self
-        
         picker.sourceType = .Camera
-        
         presentViewController(picker, animated:true, completion: nil)
     }
     
@@ -122,15 +119,12 @@ class MainViewController: UIViewController,
             let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.dismissViewControllerAnimated(true, completion: nil)
-            //presentViewController(ac, animated: true, completion: nil)
         } else {
             let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.dismissViewControllerAnimated(true, completion: nil)
-            //presentViewController(ac, animated: true, completion: nil)
         }
     }
-
     
     @IBAction func sendMail(sender: AnyObject) {
         
@@ -157,9 +151,15 @@ class MainViewController: UIViewController,
             composeVC.mailComposeDelegate = self
             
             // Configure the fields of the interface.
-            composeVC.setToRecipients(["adityamehra@aggiemail.usu.edu"])
+            composeVC.setToRecipients(["saveenergy@usu.edu"])
             composeVC.setSubject("Regarding CampusReporter")
-            composeVC.setMessageBody("https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
+            
+            if textView.text == "1. Write/Record the problem, building, and room number.\n\n2.Take a photo (optional).\n\n3.Send it.\n\nThankyou."
+            {
+            composeVC.setMessageBody("Location - https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
+            }else{
+            composeVC.setMessageBody(textView.text + "\n\n" + "Location - https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17",isHTML:false)
+            }
             
             // Attaching the captured image to the email.
             if let image = imageToattach {
@@ -177,27 +177,21 @@ class MainViewController: UIViewController,
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    /**
-     **This function is used to get the current location of the user.
-     **/
     
+    //This function is used to get the current location of the user.
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         
         let currentLocation : CLLocation = newLocation
-        
-        
         latitude = "\(currentLocation.coordinate.latitude)"
         longitude = "\(currentLocation.coordinate.longitude)"
-        //print("longitude \(self.latitude)")
-        //print("latitude \(self.longitude)")
-        
     }
     
+    //Removes first responder when view is touched
     override func touchesBegan(touches:Set<UITouch>, withEvent event: UIEvent?) {
-
         self.view.endEditing(true)
     }
     
+    //Removes the text from textView when it is edited
     func textViewDidBeginEditing(textView: UITextView) {
         textView.text = ""
     }
