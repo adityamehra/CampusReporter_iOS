@@ -165,7 +165,7 @@ class MainViewController: UIViewController,
             if let image = imageToattach {
                 let data : NSData
                 data = UIImageJPEGRepresentation(image, 1.0)!
-                composeVC.addAttachmentData(data, mimeType: "image/jpg", fileName: "image")
+                composeVC.addAttachmentData(data, mimeType: "image/jpeg", fileName: "image.jpeg")
             }
             
             // Present the view controller modally.
