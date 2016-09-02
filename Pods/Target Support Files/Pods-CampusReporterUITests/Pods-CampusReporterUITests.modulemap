@@ -1,0 +1,6 @@
+framework module Pods_CampusReporterUITests {
+  umbrella header "Pods-CampusReporterUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

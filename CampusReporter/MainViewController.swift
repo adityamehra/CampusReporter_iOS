@@ -9,13 +9,17 @@
 import UIKit
 import MessageUI
 import CoreLocation
+import AVFoundation
+import Toast_Swift
 
 class MainViewController: UIViewController,
                             UITextViewDelegate,
                             MFMailComposeViewControllerDelegate,
                             UIImagePickerControllerDelegate,
                             UINavigationControllerDelegate,
-                            CLLocationManagerDelegate{
+                            CLLocationManagerDelegate,
+                            AVAudioPlayerDelegate,
+                            AVAudioRecorderDelegate{
     
     
     @IBOutlet weak var record: UIButton!
@@ -30,6 +34,13 @@ class MainViewController: UIViewController,
     var locationManager: CLLocationManager!
     var latitude : String!
     var longitude : String!
+    
+    
+    //Variables for recording/playing sound.
+    var soundRecorder : AVAudioRecorder!
+    var soundPlayer :AVAudioPlayer!
+    var fileName = "audioFile.m4a"
+    var filePath : NSURL!
     
     override func viewWillAppear(animated: Bool) {
         play.enabled = false
@@ -55,7 +66,6 @@ class MainViewController: UIViewController,
         
         //setting delegate on textView
         textView.delegate = self
-        
         
         //Making an IBAction for UIScrollView
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(MainViewController.scrollViewTapped(_:)))
@@ -83,18 +93,128 @@ class MainViewController: UIViewController,
         return UIInterfaceOrientationMask.Portrait
     }
     
-    @IBAction func recordAudio(sender: AnyObject) {
-        print("Audio recording!");
+    
+    func setupRecorder(){
+        
+        
+        let recordSettings : [String : AnyObject] =
+            [
+                AVFormatIDKey: NSNumber(unsignedInt: kAudioFormatAppleLossless),
+                AVEncoderAudioQualityKey : AVAudioQuality.Max.rawValue as NSNumber,
+                AVEncoderBitRateKey : 320000 as NSNumber,
+                AVNumberOfChannelsKey: 2 as NSNumber,
+                AVSampleRateKey : 44100.0
+        ]
+        
+        filePath = getFileURL()
+        
+        let session = AVAudioSession.sharedInstance()
+        //try! session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        
+        var error : NSError?
+        
+        do {
+            soundRecorder = try AVAudioRecorder(URL: filePath, settings: recordSettings)
+        } catch let error1 as NSError {
+            error = error1
+            soundRecorder = nil
+        }
+        
+        if error != nil{
+            
+            NSLog("Something Wrong")
+        }
+            
+        else {
+            
+            soundRecorder.delegate = self
+            soundRecorder.prepareToRecord()
+            
+        }
+        
+    }
+    
+    func getCacheDirectory() -> String {
+        
+        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        
+        return path[0] as String
+        
+    }
+    
+    func getFileURL() -> NSURL{
+        
+        let path = NSURL.fileURLWithPathComponents([getCacheDirectory(), fileName])
+        
+        return path!
+        
+    }
+    
+    @IBAction func recordAudio(sender: UIButton) {
+        //print("Audio recording!");
+        
+        //setting up recorder
+        setupRecorder()
+        
+        soundRecorder.record()
+        
         stop.enabled = true
+        
+        self.view.makeToast("Recording Audio...", duration: 2.0, position: .Bottom)
     }
     
-    @IBAction func playAudio(sender: AnyObject) {
-        print("Playing Audio!");
+    @IBAction func playAudio(sender: UIButton) {
+        //print("Playing Audio!");
+        
+        preparePlayer()
+        soundPlayer.play()
+        
+        self.view.makeToast("Playing Audio...",  duration: 2.0, position: .Bottom)
     }
     
-    @IBAction func stopAudio(sender: AnyObject) {
-        print("Stop Audio")
+    @IBAction func stopAudio(sender: UIButton) {
+        //print("Stop Audio")
         play.enabled = true
+        soundRecorder.stop()
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+        try! audioSession.setActive(false)
+        
+        self.view.makeToast("Recording Stopped...",  duration: 2.0, position: .Bottom)
+    }
+    
+    func preparePlayer(){
+        
+        var error : NSError?
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOfURL: filePath)
+        } catch let error1 as NSError {
+            error = error1
+            soundPlayer = nil
+        }
+        
+        if error != nil{
+            
+            NSLog("sjkaldfhjakds")
+        }
+        else{
+            soundPlayer.delegate = self
+            soundPlayer.prepareToPlay()
+            soundPlayer.volume = 2.0
+        }
+        
+    }
+    
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        play.enabled = true
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+        record.enabled = true
+        play.enabled = false
     }
     
     @IBAction func takePhoto(sender: AnyObject) {
@@ -128,10 +248,13 @@ class MainViewController: UIViewController,
     
     @IBAction func sendMail(sender: AnyObject) {
         
-        print("Send Email!");
+        //print("Send Email!");
+        
+        //print(filePath);
+
         
         if !MFMailComposeViewController.canSendMail() {
-            print("Mail services are not available")
+            //print("Mail services are not available")
             
             let alertController = UIAlertController(title: "Alert", message: "Setup your Mail App.", preferredStyle: .Alert)
             
@@ -154,10 +277,11 @@ class MainViewController: UIViewController,
             composeVC.setToRecipients(["saveenergy@usu.edu"])
             composeVC.setSubject("Regarding CampusReporter")
             
-            if textView.text == "1. Write/Record the problem, building, and room number.\n\n2.Take a photo (optional).\n\n3.Send it.\n\nThankyou."
-            {
-            composeVC.setMessageBody("Location - https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
+            if textView.text == "1. Write/Record the problem, building, and room number.\n\n2.Take a photo (optional).\n\n3.Send it.\n\nThank you."{
+                //print(textView.text)
+                composeVC.setMessageBody("Location - https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17", isHTML: false)
             }else{
+                //print("else")
             composeVC.setMessageBody(textView.text + "\n\n" + "Location - https://www.google.com/maps/?q=\(latitude),\(longitude)&z=17",isHTML:false)
             }
             
@@ -168,9 +292,19 @@ class MainViewController: UIViewController,
                 composeVC.addAttachmentData(data, mimeType: "image/jpeg", fileName: "image.jpeg")
             }
             
+            
+            if filePath != nil{
+                let fileManager = NSFileManager.defaultManager()
+                let filecontent = fileManager.contentsAtPath(getCacheDirectory() + "/" + fileName)
+                composeVC.addAttachmentData(filecontent!, mimeType: "audio/x-wav", fileName: fileName)
+            }
+            
             // Present the view controller modally.
             self.presentViewController(composeVC, animated: true, completion: nil)
         }
+        
+        filePath = nil
+        imageToattach = nil
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
@@ -193,7 +327,10 @@ class MainViewController: UIViewController,
     
     //Removes the text from textView when it is edited
     func textViewDidBeginEditing(textView: UITextView) {
-        textView.text = ""
+        
+        if textView.text == "1. Write/Record the problem, building, and room number.\n\n2.Take a photo (optional).\n\n3.Send it.\n\nThank you."{
+            textView.text = ""
+        }
     }
 }
 
